@@ -14,11 +14,11 @@ export const BuilderPage: React.FC<BuilderPageProps> = ({ onSessionStart }) => {
     // Log Builder.io configuration
     console.log('Builder.io API Key:', builder.apiKey);
     console.log('Builder.io Model:', 'page');
-    console.log('Builder.io Content ID:', 'e2a9e0ba558e44e7afcf226de4e8f0bc');
+    console.log('Builder.io Content ID:', '49862c49247847edb30cba29e731c877');
 
     // Try to fetch content directly
     builder.get('page', {
-      id: 'e2a9e0ba558e44e7afcf226de4e8f0bc'
+      id: '49862c49247847edb30cba29e731c877'
     }).then(content => {
       console.log('Builder.io Content:', content);
     }).catch(error => {
@@ -39,7 +39,7 @@ export const BuilderPage: React.FC<BuilderPageProps> = ({ onSessionStart }) => {
       <BuilderComponent
         model="page"
         content={{
-          id: 'e2a9e0ba558e44e7afcf226de4e8f0bc',
+          id: '49862c49247847edb30cba29e731c877',
           data: {
             onSessionStart: handleSessionStart
           }
