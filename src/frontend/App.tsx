@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { LoadingSpinner } from './components/LoadingSpinner';
@@ -20,7 +20,7 @@ const ALL_AGENTS: AgentType[] = [
   'Visionary'
 ];
 
-const AgentSelection: React.FC = () => {
+const AgentSelection: React.FC<{ onSessionStart: () => void }> = ({ onSessionStart }) => {
   const {
     selectedAgents,
     isLoading,
@@ -31,13 +31,15 @@ const AgentSelection: React.FC = () => {
 
   const handleSessionStart = () => {
     if (selectedAgents.length === 5) {
-      startSession('user123');
+      startSession('user123').then(() => {
+        onSessionStart();
+      });
     }
   };
 
   return (
     <div className="agent-selection">
-      <BuilderPage onSessionStart={handleSessionStart} />
+      <h2>Select 5 Agents</h2>
       <div className="agent-grid">
         {ALL_AGENTS.map(agent => (
           <button
@@ -50,6 +52,13 @@ const AgentSelection: React.FC = () => {
           </button>
         ))}
       </div>
+      <button
+        className="start-session-button"
+        onClick={handleSessionStart}
+        disabled={selectedAgents.length !== 5 || isLoading}
+      >
+        {isLoading ? 'Starting Session...' : 'Start Session'}
+      </button>
       {error && <div className="error">{error}</div>}
     </div>
   );
@@ -64,7 +73,7 @@ const Dashboard: React.FC = () => {
   } = useAgent();
 
   if (!session) {
-    return <AgentSelection />;
+    return <AgentSelection onSessionStart={() => {}} />;
   }
 
   return (
@@ -92,12 +101,14 @@ const Dashboard: React.FC = () => {
 };
 
 const App: React.FC = () => {
+  const [showBuilder, setShowBuilder] = useState(false);
+
   return (
     <ErrorBoundary>
       <AgentProvider>
         <Router>
           <Routes>
-            <Route path="/" element={<AgentSelection />} />
+            <Route path="/" element={<AgentSelection onSessionStart={() => setShowBuilder(true)} />} />
             <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </Router>
