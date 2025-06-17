@@ -6,8 +6,11 @@ builder.init('0355fc8dd8574bd582b6401e6e692b5b');
 // Set the model to use
 builder.setUserAttributes({
   userType: 'business',
-  environment: 'production'
+  environment: 'production',
+  model: 'page'
 });
 
-// Set the model using the correct method
-builder.setUserAttributes({ model: 'e2a9e0ba558e44e7afcf226de4e8f0bc' });
+// Set the content ID
+builder.setUserAttributes({ 
+  contentId: 'e2a9e0ba558e44e7afcf226de4e8f0bc'
+});
