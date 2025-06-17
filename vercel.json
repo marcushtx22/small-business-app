@@ -1,12 +1,21 @@
 {
   "version": 2,
   "builds": [
-    { "src": "package.json", "use": "@vercel/static-build" }
+    { 
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "npm run build",
+        "outputDirectory": "dist"
+      }
+    }
   ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
   ],
   "env": {
-    "VITE_API_URL": "https://your-backend-url.railway.app"
+    "VITE_API_URL": "https://your-backend-url.railway.app",
+    "BUILDER_API_KEY": "0355fc8dd8574bd582b6401e6e692b5b",
+    "BUILDER_MODEL_ID": "e2a9e0ba558e44e7afcf226de4e8f0bc"
   }
 } 
