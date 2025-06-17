@@ -1,0 +1,111 @@
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 250px;
+    background-color: #1a1a1a;
+    color: white;
+    padding: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.toggle-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.sidebar-nav li {
+    margin: 0.5rem 0;
+}
+
+.sidebar-nav a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-nav a span {
+    margin-left: 0.75rem;
+}
+
+/* Main content */
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    background-color: #f5f5f5;
+}
+
+/* Builder.io specific styles */
+@media (min-width: 768px) {
+    .builder-78512657f4a045168109aa8b86f6f02a {
+        display: none;
+    }
+    .builder-20e563142c424c33b086f416417168eb {
+        display: none;
+    }
+    .builder-7577a3b4834a4152bc72fe5c4e06facf {
+        display: none;
+    }
+}
+
+.builder-07059f9675324502ba6a22fa63e50cd3:hover {
+    background-color: rgba(252, 238, 10, 0.1);
+    color: rgb(252, 238, 10);
+    border-left-color: rgb(252, 238, 10);
+    transform: translateX(4px);
+}
+
+.builder-48934f64920c4392b5e8b4e8ac286b2c:hover {
+    background-color: rgba(0, 240, 255, 0.1);
+}
+
+.builder-2458ec8ed8b0455cbd55720b9f6bdaa9:hover {
+    transform: translateY(-4px);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        height: 100vh;
+        transform: translateX(-100%);
+        z-index: 1000;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+} 

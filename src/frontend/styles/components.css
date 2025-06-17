@@ -1,0 +1,114 @@
+/* Error Boundary */
+.error-boundary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  background-color: rgba(220, 53, 69, 0.1);
+  border-radius: 8px;
+  margin: 2rem auto;
+  max-width: 600px;
+}
+
+.error-boundary h2 {
+  color: #dc3545;
+  margin-bottom: 1rem;
+}
+
+.error-boundary p {
+  margin-bottom: 1.5rem;
+  color: inherit;
+}
+
+.retry-button {
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  color: inherit;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.retry-button:hover {
+  background-color: rgba(252, 238, 10, 0.1);
+  color: rgb(252, 238, 10);
+  border-color: rgb(252, 238, 10);
+  transform: translateX(4px);
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  display: inline-block;
+  position: relative;
+}
+
+.spinner {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 3px solid;
+  border-radius: 50%;
+  animation: spinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Loading States */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.loading-container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.loading-container .loading-spinner {
+  margin-bottom: 1rem;
+}
+
+/* Builder.io theme integration */
+.error-boundary,
+.loading-container {
+  /* Preserve Builder.io theme */
+  background-color: inherit;
+  color: inherit;
+}
+
+.retry-button {
+  /* Match Builder.io hover effect */
+  background-color: transparent;
+  color: inherit;
+  border: 1px solid currentColor;
+}
+
+.retry-button:hover {
+  /* Match Builder.io hover effect */
+  background-color: rgba(252, 238, 10, 0.1);
+  color: rgb(252, 238, 10);
+  border-color: rgb(252, 238, 10);
+  transform: translateX(4px);
+} 

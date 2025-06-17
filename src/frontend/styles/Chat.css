@@ -1,0 +1,139 @@
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.agent-selector {
+  margin-bottom: 1rem;
+}
+
+.agent-selector select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #f8f9fa;
+}
+
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.message {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  max-width: 80%;
+}
+
+.message.user {
+  margin-left: auto;
+  background-color: #007bff;
+  color: white;
+}
+
+.message.agent {
+  margin-right: auto;
+  background-color: #e9ecef;
+  color: #212529;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.agent-name {
+  font-weight: 600;
+}
+
+.timestamp {
+  opacity: 0.7;
+}
+
+.message-content {
+  line-height: 1.5;
+}
+
+.input-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input-container input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.input-container button {
+  padding: 0.75rem 1.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.input-container button:hover {
+  background-color: #0056b3;
+}
+
+.input-container button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Builder.io theme integration */
+.chat-container {
+  /* Preserve Builder.io theme */
+  background-color: inherit;
+  box-shadow: none;
+}
+
+.message.user {
+  /* Match Builder.io hover effect */
+  background-color: rgba(252, 238, 10, 0.1);
+  color: inherit;
+  border-left: 3px solid rgb(252, 238, 10);
+}
+
+.message.agent {
+  /* Match Builder.io hover effect */
+  background-color: rgba(0, 240, 255, 0.1);
+  color: inherit;
+}
+
+.input-container button {
+  /* Match Builder.io theme */
+  background-color: transparent;
+  color: inherit;
+  border: 1px solid currentColor;
+}
+
+.input-container button:hover {
+  /* Match Builder.io hover effect */
+  background-color: rgba(252, 238, 10, 0.1);
+  color: rgb(252, 238, 10);
+  border-color: rgb(252, 238, 10);
+  transform: translateX(4px);
+} 
