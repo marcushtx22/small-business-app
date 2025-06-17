@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { LoadingSpinner } from './components/LoadingSpinner';
 import { Chat } from './components/Chat';
@@ -54,7 +55,7 @@ const AgentSelection: React.FC = () => {
   );
 };
 
-const MainApp: React.FC = () => {
+const Dashboard: React.FC = () => {
   const {
     session,
     isLoading,
@@ -90,12 +91,19 @@ const MainApp: React.FC = () => {
   );
 };
 
-export const App: React.FC = () => {
+const App: React.FC = () => {
   return (
     <ErrorBoundary>
       <AgentProvider>
-        <MainApp />
+        <Router>
+          <Routes>
+            <Route path="/" element={<AgentSelection />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Routes>
+        </Router>
       </AgentProvider>
     </ErrorBoundary>
   );
-}; 
+};
+
+export default App; 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BuilderComponent, useIsPreviewing } from '@builder.io/react';
+import { useNavigate } from 'react-router-dom';
 
 interface BuilderPageProps {
   onSessionStart?: () => void;
@@ -7,14 +8,22 @@ interface BuilderPageProps {
 
 export const BuilderPage: React.FC<BuilderPageProps> = ({ onSessionStart }) => {
   const isPreviewing = useIsPreviewing();
+  const navigate = useNavigate();
+
+  const handleSessionStart = () => {
+    if (onSessionStart) {
+      onSessionStart();
+    }
+    navigate('/dashboard');
+  };
 
   return (
     <BuilderComponent
       model="page"
       content={{
-        id: '0355fc8dd8574bd582b6401e6e692b5b',
+        id: 'e2a9e0ba558e44e7afcf226de4e8f0bc',
         data: {
-          onSessionStart
+          onSessionStart: handleSessionStart
         }
       }}
       options={{
