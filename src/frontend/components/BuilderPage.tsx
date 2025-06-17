@@ -18,8 +18,7 @@ export const BuilderPage: React.FC<BuilderPageProps> = ({ onSessionStart }) => {
         }
       }}
       options={{
-        includeRefs: true,
-        includeSearchParams: true
+        includeRefs: true
       }}
     />
   );
