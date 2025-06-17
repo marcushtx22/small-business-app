@@ -18,3 +18,6 @@ builder.setUserAttributes({
 builder.setUserAttributes({ 
   contentId: 'e2a9e0ba558e44e7afcf226de4e8f0bc'
 });
+
+// Export the builder instance
+export { builder };

@@ -18,7 +18,11 @@ export const BuilderPage: React.FC<BuilderPageProps> = ({ onSessionStart }) => {
 
     // Try to fetch content directly
     builder.get('page', {
-      id: '49862c49247847edb30cba29e731c877'
+      id: '49862c49247847edb30cba29e731c877',
+      options: {
+        includeRefs: true,
+        cacheSeconds: 0
+      }
     }).then(content => {
       console.log('Builder.io Content:', content);
     }).catch(error => {
