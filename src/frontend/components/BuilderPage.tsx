@@ -18,17 +18,25 @@ export const BuilderPage: React.FC<BuilderPageProps> = ({ onSessionStart }) => {
   };
 
   return (
-    <BuilderComponent
-      model="page"
-      content={{
-        id: 'e2a9e0ba558e44e7afcf226de4e8f0bc',
-        data: {
-          onSessionStart: handleSessionStart
-        }
-      }}
-      options={{
-        includeRefs: true
-      }}
-    />
+    <div className="builder-page">
+      <BuilderComponent
+        model="page"
+        content={{
+          id: 'e2a9e0ba558e44e7afcf226de4e8f0bc',
+          data: {
+            onSessionStart: handleSessionStart
+          }
+        }}
+        options={{
+          includeRefs: true
+        }}
+      />
+      <button 
+        className="start-session-button"
+        onClick={handleSessionStart}
+      >
+        Start Session
+      </button>
+    </div>
   );
 }; 
