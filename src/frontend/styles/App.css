@@ -1,80 +1,70 @@
 .app-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
+  padding: 1rem;
+  background-color: #1a1a1a;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
 }
 
 .header h1 {
   margin: 0;
-  font-size: 2rem;
-  color: inherit;
+  font-size: 1.5rem;
 }
 
 .strategy-button {
-  padding: 0.75rem 1.5rem;
-  background-color: transparent;
-  color: inherit;
-  border: 1px solid currentColor;
+  padding: 0.5rem 1rem;
+  background-color: #646cff;
+  color: white;
+  border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.strategy-button:hover {
-  background-color: rgba(252, 238, 10, 0.1);
-  color: rgb(252, 238, 10);
-  border-color: rgb(252, 238, 10);
-  transform: translateX(4px);
+.strategy-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .agent-selection {
+  width: 100%;
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
-}
-
-.agent-selection h2 {
-  margin-bottom: 2rem;
-  font-size: 1.5rem;
-  color: inherit;
 }
 
 .agent-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 
 .agent-button {
   padding: 1rem;
-  background-color: transparent;
-  color: inherit;
-  border: 1px solid currentColor;
+  background-color: #1a1a1a;
+  color: white;
+  border: 1px solid #646cff;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .agent-button:hover:not(:disabled) {
-  background-color: rgba(252, 238, 10, 0.1);
-  color: rgb(252, 238, 10);
-  border-color: rgb(252, 238, 10);
-  transform: translateX(4px);
+  background-color: #646cff;
 }
 
 .agent-button.selected {
-  background-color: rgba(252, 238, 10, 0.1);
-  color: rgb(252, 238, 10);
-  border-color: rgb(252, 238, 10);
+  background-color: #646cff;
 }
 
 .agent-button:disabled {
@@ -82,34 +72,11 @@
   cursor: not-allowed;
 }
 
-.start-button {
-  padding: 1rem 2rem;
-  background-color: transparent;
-  color: inherit;
-  border: 2px solid currentColor;
-  border-radius: 4px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.start-button:hover:not(:disabled) {
-  background-color: rgba(252, 238, 10, 0.1);
-  color: rgb(252, 238, 10);
-  border-color: rgb(252, 238, 10);
-  transform: translateX(4px);
-}
-
-.start-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 .error {
-  color: #dc3545;
-  margin: 1rem 0;
+  color: #ff4444;
+  margin-top: 1rem;
   padding: 0.5rem;
-  background-color: rgba(220, 53, 69, 0.1);
+  background-color: rgba(255, 68, 68, 0.1);
   border-radius: 4px;
 }
 
@@ -125,7 +92,6 @@
 }
 
 .agent-button,
-.start-button,
 .strategy-button {
   /* Match Builder.io hover effect */
   background-color: transparent;
@@ -134,7 +100,6 @@
 }
 
 .agent-button:hover:not(:disabled),
-.start-button:hover:not(:disabled),
 .strategy-button:hover {
   /* Match Builder.io hover effect */
   background-color: rgba(252, 238, 10, 0.1);
