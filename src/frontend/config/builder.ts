@@ -3,10 +3,14 @@ import { builder } from '@builder.io/react';
 // Initialize Builder.io with your API key
 builder.init('0355fc8dd8574bd582b6401e6e692b5b');
 
-// Set the model to use
+// Set user attributes
 builder.setUserAttributes({
   userType: 'business',
-  environment: 'production',
+  environment: 'production'
+});
+
+// Set the model to use
+builder.setUserAttributes({
   model: 'page'
 });
 

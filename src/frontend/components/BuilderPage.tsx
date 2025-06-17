@@ -1,5 +1,5 @@
-import React from 'react';
-import { BuilderComponent, useIsPreviewing } from '@builder.io/react';
+import React, { useEffect } from 'react';
+import { BuilderComponent, useIsPreviewing, builder } from '@builder.io/react';
 import { useNavigate } from 'react-router-dom';
 
 interface BuilderPageProps {
@@ -9,6 +9,22 @@ interface BuilderPageProps {
 export const BuilderPage: React.FC<BuilderPageProps> = ({ onSessionStart }) => {
   const isPreviewing = useIsPreviewing();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Log Builder.io configuration
+    console.log('Builder.io API Key:', builder.apiKey);
+    console.log('Builder.io Model:', 'page');
+    console.log('Builder.io Content ID:', 'e2a9e0ba558e44e7afcf226de4e8f0bc');
+
+    // Try to fetch content directly
+    builder.get('page', {
+      id: 'e2a9e0ba558e44e7afcf226de4e8f0bc'
+    }).then(content => {
+      console.log('Builder.io Content:', content);
+    }).catch(error => {
+      console.error('Builder.io Error:', error);
+    });
+  }, []);
 
   const handleSessionStart = () => {
     if (onSessionStart) {
@@ -29,7 +45,8 @@ export const BuilderPage: React.FC<BuilderPageProps> = ({ onSessionStart }) => {
           }
         }}
         options={{
-          includeRefs: true
+          includeRefs: true,
+          cacheSeconds: 0
         }}
       />
       <button 
