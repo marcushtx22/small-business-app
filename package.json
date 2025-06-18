@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node dist/server.js",
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "npm run build:server && npm run build:client",
     "build:server": "tsc",
     "build:client": "vite build",
     "test": "jest"
