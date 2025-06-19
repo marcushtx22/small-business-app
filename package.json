@@ -9,10 +9,10 @@
   "scripts": {
     "start": "node dist/server.js",
     "dev": "vite",
-    "build": "npm run build:server && npm run build:client",
-    "build:server": "tsc",
+    "build": "npm run build:client",
     "build:client": "vite build",
-    "test": "jest"
+    "test": "jest",
+    "setup": "node setup-mongodb.js"
   },
   "dependencies": {
     "@builder.io/react": "^3.0.0",
