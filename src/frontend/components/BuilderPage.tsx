@@ -50,6 +50,27 @@ export const BuilderPage: React.FC<BuilderPageProps> = ({ onSessionStart }) => {
 
   return (
     <div className="builder-page">
+      <button
+        className="cyber-dash-button"
+        style={{
+          position: 'absolute',
+          top: 24,
+          left: 24,
+          zIndex: 10,
+          padding: '0.75rem 1.5rem',
+          background: '#646cff',
+          color: 'white',
+          border: 'none',
+          borderRadius: 6,
+          fontWeight: 600,
+          fontSize: '1.1rem',
+          cursor: 'pointer',
+          boxShadow: '0 2px 8px rgba(100,108,255,0.12)'
+        }}
+        onClick={() => navigate('/dashboard')}
+      >
+        Cyber Dash
+      </button>
       {content && (
         <BuilderComponent
           model="page"
