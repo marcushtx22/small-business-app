@@ -118,22 +118,9 @@
   color: inherit;
 }
 
-.agent-button,
-.strategy-button {
-  /* Match Builder.io hover effect */
-  background-color: transparent;
-  color: inherit;
-  border: 1px solid currentColor;
-}
-
-.agent-button:hover:not(:disabled),
-.strategy-button:hover {
-  /* Match Builder.io hover effect */
-  background-color: rgba(252, 238, 10, 0.1);
-  color: rgb(252, 238, 10);
-  border-color: rgb(252, 238, 10);
-  transform: translateX(4px);
-}
+/* Remove Builder.io theme integration for agent-button and strategy-button hover */
+/* .agent-button, .strategy-button { background-color: transparent; color: inherit; border: 1px solid currentColor; } */
+/* .agent-button:hover:not(:disabled), .strategy-button:hover { background-color: rgba(252, 238, 10, 0.1); color: rgb(252, 238, 10); border-color: rgb(252, 238, 10); transform: translateX(4px); } */
 
 .builder-page {
   width: 100%;
