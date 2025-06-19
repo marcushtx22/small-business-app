@@ -103,27 +103,13 @@ const Dashboard: React.FC = () => {
   );
 };
 
-const HomePage: React.FC = () => (
-  <div style={{ display: 'flex', minHeight: '100vh', background: '#f5f5fa' }}>
-    <div style={{ boxShadow: '2px 0 8px rgba(0,0,0,0.06)', zIndex: 2 }}>
-      <AgentSelection onSessionStart={() => {}} />
-    </div>
-    <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f5f5fa' }}>
-      <div style={{ background: '#fff', padding: '2.5rem 3rem', borderRadius: '12px', boxShadow: '0 2px 16px rgba(0,0,0,0.07)', minWidth: 320, textAlign: 'center' }}>
-        <h1 style={{ marginBottom: '1.5rem' }}>Welcome to the AI Agent Platform</h1>
-        <p style={{ fontSize: '1.1rem', color: '#444' }}>Select 5 agents from the sidebar and click <b>Start Session</b> to begin.</p>
-      </div>
-    </div>
-  </div>
-);
-
 const App: React.FC = () => {
   return (
     <ErrorBoundary>
       <AgentProvider>
         <Router>
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/builder" element={<BuilderPage />} />
           </Routes>
