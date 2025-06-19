@@ -29,4 +29,5 @@ app.get('/health', (req, res) => {
 });
 
 // Remove app.listen for Vercel serverless
-export default app; 
+export default app;
+module.exports = app; 
