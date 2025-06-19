@@ -108,7 +108,14 @@ const App: React.FC = () => {
       <AgentProvider>
         <Router>
           <Routes>
-            <Route path="/" element={<AgentSelection onSessionStart={() => setShowBuilder(true)} />} />
+            <Route
+              path="/"
+              element={
+                showBuilder
+                  ? <BuilderPage onSessionStart={() => setShowBuilder(false)} />
+                  : <AgentSelection onSessionStart={() => setShowBuilder(true)} />
+              }
+            />
             <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </Router>
