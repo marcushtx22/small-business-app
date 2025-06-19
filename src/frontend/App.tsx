@@ -40,18 +40,19 @@ const AgentSelection: React.FC<{ onSessionStart: () => void }> = ({ onSessionSta
   return (
     <div className="agent-selection">
       <h2>Select 5 Agents</h2>
-      <div className="agent-grid">
+      <ul className="agent-vertical-list">
         {ALL_AGENTS.map(agent => (
-          <button
-            key={agent}
-            className={`agent-button ${selectedAgents.includes(agent) ? 'selected' : ''}`}
-            onClick={() => selectAgent(agent)}
-            disabled={selectedAgents.length >= 5 && !selectedAgents.includes(agent)}
-          >
-            {agent}
-          </button>
+          <li key={agent}>
+            <button
+              className={`agent-button ${selectedAgents.includes(agent) ? 'selected' : ''}`}
+              onClick={() => selectAgent(agent)}
+              disabled={selectedAgents.length >= 5 && !selectedAgents.includes(agent)}
+            >
+              {agent}
+            </button>
+          </li>
         ))}
-      </div>
+      </ul>
       <button
         className="start-session-button"
         onClick={handleSessionStart}
