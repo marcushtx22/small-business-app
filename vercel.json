@@ -2,21 +2,30 @@
   "version": 2,
   "builds": [
     {
+      "src": "src/backend/package.json",
+      "use": "@vercel/node",
+      "config": {
+        "buildCommand": "cd src/backend && npm install && npm run build",
+        "includeFiles": "src/backend/dist/**"
+      }
+    },
+    {
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "buildCommand": "npm run build",
-        "outputDirectory": "dist",
-        "installCommand": "npm install"
+        "buildCommand": "npm run build:client",
+        "outputDirectory": "dist"
       }
     }
   ],
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
+  "routes": [
+    { "src": "/api/(.*)", "dest": "src/backend/dist/index.js" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ],
   "env": {
     "VITE_API_URL": "https://your-backend-url.railway.app",
     "BUILDER_API_KEY": "0355fc8dd8574bd582b6401e6e692b5b",
-    "BUILDER_MODEL_ID": "e2a9e0ba558e44e7afcf226de4e8f0bc"
+    "BUILDER_MODEL_ID": "e2a9e0ba558e44e7afcf226de4e8f0bc",
+    "MONGODB_URI": "your-mongodb-connection-string-here"
   }
 } 
