@@ -67,7 +67,7 @@ export const BuilderPage: React.FC<BuilderPageProps> = ({ onSessionStart }) => {
           cursor: 'pointer',
           boxShadow: '0 2px 8px rgba(100,108,255,0.12)'
         }}
-        onClick={() => navigate('/dashboard')}
+        onClick={() => window.dispatchEvent(new CustomEvent('open-dashboard-tabs'))}
       >
         Cyber Dash
       </button>
