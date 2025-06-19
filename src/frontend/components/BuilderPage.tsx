@@ -33,7 +33,12 @@ export const BuilderPage: React.FC<BuilderPageProps> = ({ onSessionStart }) => {
     .catch(error => {
       console.error('Builder.io Error:', error);
     });
-  }, []);
+
+    // Listen for custom event from Builder.io menu button
+    const handler = () => navigate('/dashboard');
+    window.addEventListener('open-dashboard', handler);
+    return () => window.removeEventListener('open-dashboard', handler);
+  }, [navigate]);
 
   const handleSessionStart = () => {
     if (onSessionStart) {
