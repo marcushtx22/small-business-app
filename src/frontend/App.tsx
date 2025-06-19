@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { LoadingSpinner } from './components/LoadingSpinner';
 import { Chat } from './components/Chat';
@@ -28,11 +28,13 @@ const AgentSelection: React.FC<{ onSessionStart: () => void }> = ({ onSessionSta
     selectAgent,
     startSession
   } = useAgent();
+  const navigate = useNavigate();
 
   const handleSessionStart = () => {
     if (selectedAgents.length === 5) {
       startSession('user123').then(() => {
         onSessionStart();
+        navigate('/builder');
       });
     }
   };
