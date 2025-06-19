@@ -6,59 +6,44 @@ export class ApiService {
   static async startSession(userId: string, agents: AgentType[]): Promise<Session> {
     const response = await fetch(`${this.baseUrl}/sessions`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userId, agents }),
     });
-
-    if (!response.ok) {
-      throw new Error('Failed to start session');
-    }
-
-    const data: SessionResponse = await response.json();
-    return data.session;
+    if (!response.ok) throw new Error('Failed to start session');
+    const data = await response.json();
+    return data.session || data; // support both {session} and direct session response
   }
 
   static async sendMessage(sessionId: string, content: string): Promise<Message[]> {
-    const response = await fetch(`${this.baseUrl}/sessions/${sessionId}/messages`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ content }),
-    });
+    // Mock response
+    const mockMessage: Message = {
+      id: 'mock-message-' + Date.now(),
+      sessionId,
+      content,
+      role: 'user',
+      timestamp: new Date()
+    };
 
-    if (!response.ok) {
-      throw new Error('Failed to send message');
-    }
-
-    const data: SessionResponse = await response.json();
-    return data.messages;
+    return [mockMessage];
   }
 
   static async getMessages(sessionId: string): Promise<Message[]> {
-    const response = await fetch(`${this.baseUrl}/sessions/${sessionId}/messages`);
-
-    if (!response.ok) {
-      throw new Error('Failed to fetch messages');
-    }
-
-    return response.json();
+    // Mock response
+    return [];
   }
 
   static async downloadStrategyReport(sessionId: string): Promise<StrategyReport> {
-    const response = await fetch(`${this.baseUrl}/sessions/${sessionId}/report`);
+    // Mock response
+    const mockReport: StrategyReport = {
+      id: 'mock-report-' + Date.now(),
+      sessionId,
+      content: 'This is a mock strategy report.',
+      createdAt: new Date(),
+      insights: []
+    };
 
-    if (!response.ok) {
-      throw new Error('Failed to generate strategy report');
-    }
-
-    const data: StrategyReportResponse = await response.json();
-    const report = data.report;
-    
     // Create a download link for the report
-    const blob = new Blob([report.content], { type: 'text/plain' });
+    const blob = new Blob([mockReport.content], { type: 'text/plain' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -68,6 +53,6 @@ export class ApiService {
     window.URL.revokeObjectURL(url);
     document.body.removeChild(a);
 
-    return report;
+    return mockReport;
   }
 } 
