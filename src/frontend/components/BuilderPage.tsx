@@ -39,8 +39,8 @@ export const BuilderPage: React.FC<BuilderPageProps> = ({ onSessionStart }) => {
     if (onSessionStart) {
       onSessionStart();
     }
-    // Navigate to dashboard after session starts
-    navigate('/dashboard');
+    // Navigate to the user's Builder.io page after session starts
+    window.location.href = 'https://www.builder.my/page?model=page';
   };
 
   return (
