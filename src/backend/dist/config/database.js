@@ -5,9 +5,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectDB = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/small-business-app';
+const MONGODB_URI = process.env.MONGODB_URI;
+if (!MONGODB_URI) {
+    throw new Error('Please define the MONGODB_URI environment variable inside .env');
+}
 const connectDB = async () => {
     try {
+        if (mongoose_1.default.connection.readyState >= 1) {
+            return;
+        }
         await mongoose_1.default.connect(MONGODB_URI);
         console.log('MongoDB connected successfully');
     }

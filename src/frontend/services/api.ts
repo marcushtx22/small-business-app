@@ -1,7 +1,7 @@
 import { Session, Message, AgentType, StrategyReport, SessionResponse, StrategyReportResponse } from '../../types';
 
 export class ApiService {
-  private static baseUrl = '/api';
+  private static baseUrl = import.meta.env.VITE_API_URL || '/api';
 
   static async startSession(userId: string, agents: AgentType[]): Promise<Session> {
     const response = await fetch(`${this.baseUrl}/sessions`, {

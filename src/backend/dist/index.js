@@ -13,6 +13,7 @@ const report_1 = require("./routes/report");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3001;
+const handler = app;
 // Connect to MongoDB
 (0, database_1.connectDB)();
 // Middleware
@@ -26,6 +27,6 @@ app.use('/api/reports', report_1.reportRouter);
 app.get('/health', (req, res) => {
     res.json({ status: 'ok' });
 });
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
+// Remove app.listen for Vercel serverless
+exports.default = handler;
+module.exports = handler;

@@ -38,7 +38,7 @@ const AgentSelection: React.FC<{ onSessionStart: () => void }> = ({ onSessionSta
   };
 
   return (
-    <div className="agent-selection">
+    <div className="agent-sidebar-container">
       <h2>Select 5 Agents</h2>
       <ul className="agent-vertical-list">
         {ALL_AGENTS.map(agent => (
@@ -53,14 +53,16 @@ const AgentSelection: React.FC<{ onSessionStart: () => void }> = ({ onSessionSta
           </li>
         ))}
       </ul>
-      <button
-        className="start-session-button"
-        onClick={handleSessionStart}
-        disabled={selectedAgents.length !== 5 || isLoading}
-      >
-        {isLoading ? 'Starting Session...' : 'Start Session'}
-      </button>
-      {error && <div className="error">{error}</div>}
+      <div className="sidebar-bottom">
+        <button
+          className="start-session-button"
+          onClick={handleSessionStart}
+          disabled={selectedAgents.length !== 5 || isLoading}
+        >
+          {isLoading ? 'Starting Session...' : 'Start Session'}
+        </button>
+        {error && <div className="error">{error}</div>}
+      </div>
     </div>
   );
 };
@@ -101,23 +103,28 @@ const Dashboard: React.FC = () => {
   );
 };
 
-const App: React.FC = () => {
-  const [showBuilder, setShowBuilder] = useState(false);
+const HomePage: React.FC = () => (
+  <div style={{ display: 'flex', minHeight: '100vh' }}>
+    <AgentSelection onSessionStart={() => {}} />
+    <div style={{ flex: 1, background: '#f5f5fa', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div>
+        <h1>Welcome to the AI Agent Platform</h1>
+        <p>Select 5 agents from the sidebar and click "Start Session" to begin.</p>
+        <p style={{ color: 'red', fontWeight: 'bold' }}>DEPLOYMENT TEST 123 - If you see this, the code is up to date.</p>
+      </div>
+    </div>
+  </div>
+);
 
+const App: React.FC = () => {
   return (
     <ErrorBoundary>
       <AgentProvider>
         <Router>
           <Routes>
-            <Route
-              path="/"
-              element={
-                showBuilder
-                  ? <BuilderPage onSessionStart={() => setShowBuilder(false)} />
-                  : <AgentSelection onSessionStart={() => setShowBuilder(true)} />
-              }
-            />
+            <Route path="/" element={<HomePage />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/builder" element={<BuilderPage />} />
           </Routes>
         </Router>
       </AgentProvider>

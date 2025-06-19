@@ -10,6 +10,7 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3001;
+const handler = app;
 
 // Connect to MongoDB
 connectDB();
@@ -29,5 +30,5 @@ app.get('/health', (req, res) => {
 });
 
 // Remove app.listen for Vercel serverless
-export default app;
-module.exports = app; 
+export default handler;
+module.exports = handler; 
