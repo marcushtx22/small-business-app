@@ -7,6 +7,7 @@ import { AgentProvider, useAgent } from './context/AgentContext';
 import { AgentType } from '../types';
 import './styles/App.css';
 import './styles/components.css';
+import { BuilderComponent, builder } from '@builder.io/react';
 
 const ALL_AGENTS: AgentType[] = [
   'OpsBot',
@@ -52,13 +53,24 @@ const Dashboard: React.FC = () => {
   );
 };
 
+builder.init('0355fc8dd8574bd582b6401e6e692b5b'); // Use your Builder.io public API key
+
+const BUILDER_CONTENT_ID = '49862c49247847edb30cba29e731c877';
+
 const App: React.FC = () => {
   return (
-    <ErrorBoundary>
-      <AgentProvider>
-        <Dashboard />
-      </AgentProvider>
-    </ErrorBoundary>
+    <div className="builder-page">
+      <BuilderComponent
+        model="page"
+        content={{
+          id: BUILDER_CONTENT_ID
+        }}
+        options={{
+          includeRefs: true,
+          cacheSeconds: 0
+        }}
+      />
+    </div>
   );
 };
 
