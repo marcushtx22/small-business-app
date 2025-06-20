@@ -55,46 +55,23 @@ const Dashboard: React.FC = () => {
 
 builder.init('0355fc8dd8574bd582b6401e6e692b5b');
 
-const BUILDER_CONTENT_ID = '49862c49247847edb30cba29e731c877';
-
-const App: React.FC = () => {
-  const [content, setContent] = useState<any>(null);
-
-  useEffect(() => {
-    fetch(`https://cdn.builder.io/api/v3/content/page/${BUILDER_CONTENT_ID}?apiKey=0355fc8dd8574bd582b6401e6e692b5b`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data && data.results && data.results[0]) {
-          setContent(data.results[0]);
-        }
-      })
-      .catch(error => {
-        console.error('Builder.io Error:', error);
-      });
-  }, []);
-
-  return (
-    <div className="builder-page">
-      {content ? (
-        <BuilderComponent
-          model="page"
-          content={content}
-          options={{
-            includeRefs: true,
-            cacheSeconds: 0
-          }}
-        />
-      ) : (
-        <div style={{ padding: 40, textAlign: 'center' }}>Loading dashboard...</div>
-      )}
-    </div>
-  );
-};
+const App: React.FC = () => (
+  <div className="builder-page">
+    <BuilderComponent
+      model="page"
+      options={{
+        includeRefs: true,
+        cacheSeconds: 0,
+        query: [
+          {
+            property: 'id',
+            operator: 'is',
+            value: '49862c49247847edb30cba29e731c877'
+          }
+        ]
+      }}
+    />
+  </div>
+);
 
 export default App; 
