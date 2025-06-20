@@ -25,10 +25,19 @@ module.exports = async (req, res) => {
     const reply = completion.data.choices[0].message.content;
     res.status(200).json({ reply });
   } catch (error) {
-    console.error('OpenAI API error:', error.response?.data || error.message);
+    // Log the full error object for Vercel logs
+    console.error('OpenAI API error:', error);
+    let details = '';
+    if (error.response && error.response.data) {
+      details = JSON.stringify(error.response.data);
+    } else if (error.message) {
+      details = error.message;
+    } else {
+      details = JSON.stringify(error);
+    }
     res.status(500).json({ 
       error: 'Failed to get response from OpenAI',
-      details: error.response?.data || error.message || error.toString()
+      details
     });
   }
 }; 
