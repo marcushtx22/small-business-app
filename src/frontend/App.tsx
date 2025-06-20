@@ -9,76 +9,63 @@ import { AgentType } from '../types';
 import './styles/App.css';
 import './styles/components.css';
 
-const ALL_AGENTS: AgentType[] = [
-  'OpsBot',
-  'FinanceFix',
-  'SalesGenie',
-  'SupportX',
-  'BrandBuilder',
-  'MarketMind',
-  'GrowthGuru',
-  'Visionary'
-];
-
-const AgentSelection: React.FC<{ onSessionStart: () => void }> = ({ onSessionStart }) => {
-  const {
-    selectedAgents,
-    isLoading,
-    error,
-    selectAgent,
-    startSession
-  } = useAgent();
-  const navigate = useNavigate();
-
-  const handleSessionStart = () => {
-    if (selectedAgents.length === 5) {
-      startSession('user123').then(() => {
-        onSessionStart();
-        navigate('/builder');
-      });
-    }
-  };
-
-  return (
-    <div className="agent-sidebar-container">
-      <h2>Select 5 Agents</h2>
-      <ul className="agent-vertical-list">
-        {ALL_AGENTS.map(agent => (
-          <li key={agent}>
-            <button
-              className={`agent-button ${selectedAgents.includes(agent) ? 'selected' : ''}`}
-              onClick={() => selectAgent(agent)}
-              disabled={selectedAgents.length >= 5 && !selectedAgents.includes(agent)}
-            >
-              {agent}
-            </button>
-          </li>
-        ))}
-      </ul>
-      <div className="sidebar-bottom">
-        <button
-          className="start-session-button"
-          onClick={handleSessionStart}
-          disabled={selectedAgents.length !== 5 || isLoading}
-        >
-          {isLoading ? 'Starting Session...' : 'Start Session'}
-        </button>
-        {error && <div className="error">{error}</div>}
-      </div>
-    </div>
-  );
-};
-
 const Dashboard: React.FC = () => {
   const {
     session,
     isLoading,
     error,
-    downloadStrategyReport
+    downloadStrategyReport,
+    selectedAgents,
+    selectAgent,
+    startSession
   } = useAgent();
+  const [sessionStarted, setSessionStarted] = useState(false);
 
-  if (!session) {
-    return <AgentSelection onSessionStart={() => {}} />;
+  const ALL_AGENTS: AgentType[] = [
+    'OpsBot',
+    'FinanceFix',
+    'SalesGenie',
+    'SupportX',
+    'BrandBuilder',
+    'MarketMind',
+    'GrowthGuru',
+    'Visionary'
+  ];
+
+  const handleSessionStart = () => {
+    if (selectedAgents.length > 0) {
+      startSession('user123').then(() => setSessionStarted(true));
+    }
+  };
+
+  if (!session || !sessionStarted) {
+    return (
+      <div className="agent-selection agent-sidebar-container">
+        <h2>Select Agents</h2>
+        <ul className="agent-vertical-list">
+          {ALL_AGENTS.map(agent => (
+            <li key={agent}>
+              <button
+                className={`agent-button ${selectedAgents.includes(agent) ? 'selected' : ''}`}
+                onClick={() => selectAgent(agent)}
+              >
+                {agent}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <div className="sidebar-bottom">
+          <button
+            className="start-session-button"
+            onClick={handleSessionStart}
+            disabled={selectedAgents.length === 0 || isLoading}
+          >
+            {isLoading ? 'Starting Session...' : 'Start Session'}
+          </button>
+          {error && <div className="error">{error}</div>}
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -113,7 +100,6 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/builder" element={<BuilderPage />} />
           </Routes>
         </Router>
       </AgentProvider>

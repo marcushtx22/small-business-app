@@ -78,14 +78,12 @@ export const AgentProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [state, dispatch] = useReducer(agentReducer, initialState);
 
   const startSession = async (userId: string) => {
-    if (state.selectedAgents.length !== 5) {
-      dispatch({ type: 'SET_ERROR', payload: 'Please select exactly 5 agents' });
+    if (state.selectedAgents.length === 0) {
+      dispatch({ type: 'SET_ERROR', payload: 'Please select at least one agent' });
       return;
     }
-
     dispatch({ type: 'SET_LOADING', payload: true });
     dispatch({ type: 'SET_ERROR', payload: null });
-
     try {
       const session = await ApiService.startSession(userId, state.selectedAgents);
       dispatch({ type: 'SET_SESSION', payload: session });
@@ -130,7 +128,7 @@ export const AgentProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const selectAgent = (agent: AgentType) => {
     if (state.selectedAgents.includes(agent)) {
       dispatch({ type: 'DESELECT_AGENT', payload: agent });
-    } else if (state.selectedAgents.length < 5) {
+    } else {
       dispatch({ type: 'SELECT_AGENT', payload: agent });
     }
   };
