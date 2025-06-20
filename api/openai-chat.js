@@ -26,6 +26,9 @@ module.exports = async (req, res) => {
     res.status(200).json({ reply });
   } catch (error) {
     console.error('OpenAI API error:', error.response?.data || error.message);
-    res.status(500).json({ error: 'Failed to get response from OpenAI' });
+    res.status(500).json({ 
+      error: 'Failed to get response from OpenAI',
+      details: error.response?.data || error.message || error.toString()
+    });
   }
 }; 

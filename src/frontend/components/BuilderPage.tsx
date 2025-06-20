@@ -62,7 +62,11 @@ export const BuilderPage: React.FC<BuilderPageProps> = ({ onSessionStart }) => {
         body: JSON.stringify({ messages: [...chatMessages, { role: 'user', content: userMessage }] })
       });
       const data = await response.json();
-      setChatMessages(msgs => [...msgs, { role: 'assistant', content: data.reply }]);
+      if (!response.ok) {
+        setChatMessages(msgs => [...msgs, { role: 'assistant', content: `Sorry, there was an error. Details: ${data.error || ''} ${data.details || ''}` }]);
+      } else {
+        setChatMessages(msgs => [...msgs, { role: 'assistant', content: data.reply }]);
+      }
     } catch (err) {
       setChatMessages(msgs => [...msgs, { role: 'assistant', content: 'Sorry, there was an error.' }]);
     } finally {
