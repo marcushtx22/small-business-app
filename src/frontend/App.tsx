@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { LoadingSpinner } from './components/LoadingSpinner';
@@ -53,23 +53,46 @@ const Dashboard: React.FC = () => {
   );
 };
 
-builder.init('0355fc8dd8574bd582b6401e6e692b5b'); // Use your Builder.io public API key
+builder.init('0355fc8dd8574bd582b6401e6e692b5b');
 
 const BUILDER_CONTENT_ID = '49862c49247847edb30cba29e731c877';
 
 const App: React.FC = () => {
+  const [content, setContent] = useState<any>(null);
+
+  useEffect(() => {
+    fetch(`https://cdn.builder.io/api/v3/content/page/${BUILDER_CONTENT_ID}?apiKey=0355fc8dd8574bd582b6401e6e692b5b`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.results && data.results[0]) {
+          setContent(data.results[0]);
+        }
+      })
+      .catch(error => {
+        console.error('Builder.io Error:', error);
+      });
+  }, []);
+
   return (
     <div className="builder-page">
-      <BuilderComponent
-        model="page"
-        content={{
-          id: BUILDER_CONTENT_ID
-        }}
-        options={{
-          includeRefs: true,
-          cacheSeconds: 0
-        }}
-      />
+      {content ? (
+        <BuilderComponent
+          model="page"
+          content={content}
+          options={{
+            includeRefs: true,
+            cacheSeconds: 0
+          }}
+        />
+      ) : (
+        <div style={{ padding: 40, textAlign: 'center' }}>Loading dashboard...</div>
+      )}
     </div>
   );
 };
