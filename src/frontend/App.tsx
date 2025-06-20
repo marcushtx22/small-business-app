@@ -62,6 +62,7 @@ const App: React.FC = () => (
       options={{
         includeRefs: true,
         cacheSeconds: 0,
+        url: '/page',
         query: [
           {
             property: 'id',
