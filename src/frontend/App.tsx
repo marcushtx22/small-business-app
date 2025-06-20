@@ -19,7 +19,6 @@ const Dashboard: React.FC = () => {
     selectAgent,
     startSession
   } = useAgent();
-  const [sessionStarted, setSessionStarted] = useState(false);
 
   const ALL_AGENTS: AgentType[] = [
     'OpsBot',
@@ -34,11 +33,11 @@ const Dashboard: React.FC = () => {
 
   const handleSessionStart = () => {
     if (selectedAgents.length > 0) {
-      startSession('user123').then(() => setSessionStarted(true));
+      startSession('user123');
     }
   };
 
-  if (!session || !sessionStarted) {
+  if (!session) {
     return (
       <div className="agent-selection agent-sidebar-container">
         <h2>Select Agents</h2>
